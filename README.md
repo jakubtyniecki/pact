@@ -1,0 +1,2 @@
+# pact
+Python Algorithms Collection

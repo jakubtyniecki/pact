@@ -11,21 +11,20 @@ class InsertSortTests(unittest.TestCase):
 
     def setUp(self):
         """ setting up for the test """
-        #self.arr = random.sample(range(self.max), self.max)
+        self.arr = random.sample(range(self.max), self.max)
 
     def tearDown(self):
         """ cleaning up after the test"""
-        #del self.arr
+        pass
 
-    # def is_sorted(self, arr):
-    #     """ assert array is sorted """
-    #     return all(arr[i] <= arr[i+1] for i in range(len(arr)-1))
+    def is_sorted(self, arr):
+        """ assert array is sorted """
+        return all(arr[i] <= arr[i+1] for i in range(len(arr)-1))
 
     def test_sort(self):
         """ should sort a given array """
         res = insert.sort(self.arr)
-        #self.assertTrue(self.is_sorted(res))
-        self.assertTrue(all(res[i] <= res[i+1] for i in range(len(res)-1)))
+        self.assertTrue(self.is_sorted(res))
 
-suite = unittest.TestLoader().loadTestsFromTestCase(InsertSortTests)
-unittest.TextTestRunner(verbosity=2).run(suite)
+#suite = unittest.TestLoader().loadTestsFromTestCase(InsertSortTests)
+#unittest.TextTestRunner(verbosity=2).run(suite)

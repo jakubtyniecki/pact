@@ -3,6 +3,19 @@
 
 def sort(arr):
     """ insert sort """
+
+    if arr is None:
+        raise ValueError("input array is null")
+    if len(arr) == 0:
+        return []
+
+    insertsort(arr)
+
+    return arr
+
+def insertsort(arr):
+    """ insert sort """
+
     for i in range(1, len(arr)):
         currentvalue = arr[i]
         position = i
@@ -12,4 +25,3 @@ def sort(arr):
             position = position - 1
 
         arr[position] = currentvalue
-    return arr

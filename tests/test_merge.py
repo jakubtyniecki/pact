@@ -1,11 +1,12 @@
-""" insert sort tests module """
+
+""" merge sort tests module """
 
 import unittest
 import random
-from sort import insert
+from sort import merge
 
-class InsertSortTests(unittest.TestCase):
-    """ insert sort unit tests class """
+class MergeSortTests(unittest.TestCase):
+    """ merge sort unit tests class """
     max = 100
     arr = []
 
@@ -27,7 +28,7 @@ class InsertSortTests(unittest.TestCase):
         inp = None
         # act
         with self.assertRaises(ValueError) as ex:
-            insert.sort(inp)
+            merge.sort(inp)
         # assert
         self.assertEqual("input array is null", str(ex.exception))
 
@@ -36,14 +37,14 @@ class InsertSortTests(unittest.TestCase):
         # arrange
         inp = []
         # act
-        res = insert.sort([])
+        res = merge.sort([])
         # assert
         self.assertEqual(len(inp), len(res))
 
     def test_sort_a_given_array(self):
         """ should sort a given array """
         # act
-        res = insert.sort(self.arr)
+        res = merge.sort(self.arr)
         # assert
         self.assertTrue(self.is_sorted(res))
 

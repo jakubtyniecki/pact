@@ -9,3 +9,6 @@ def main():
     print(res)
 
 main()
+
+#suite = unittest.TestLoader().loadTestsFromTestCase(InsertSortTests)
+#unittest.TextTestRunner(verbosity=2).run(suite)

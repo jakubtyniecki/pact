@@ -23,7 +23,7 @@ def quicksort(arr, first, last):
 
 def partition(arr, first, last):
     """ partition """
-    pivotvalue = arr[first]
+    pivotvalue = arr[pivotpoint(first, last)]
 
     leftmark, rightmark = first + 1, last
 
@@ -43,3 +43,7 @@ def partition(arr, first, last):
     arr[first], arr[rightmark] = arr[rightmark], arr[first]
 
     return rightmark
+
+def pivotpoint(first, last):
+    """ pivot point strategy """
+    return (last - first) // 2

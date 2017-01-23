@@ -15,18 +15,9 @@ def main():
     results["heap"] = metrics.execute(heap)
     results["quick"] = metrics.execute(quick)
 
-    #pprint.pprint(results)
-
     print("{}\t{}\t{}\t{}".format("", "small", "medium", "large"))
     for key in results.keys():
-        print("{}\t{}\t{}\t{}".format(key, results[key]["small"], results[key]["medium"], results[key]["large"]))
-
-    # print("\t")
-    # for key in results.keys():
-    #     print("{0:s}\t".format(key))
-
-    # for set_key in ["small", "medium", "large"]:
-    #     for key in results.keys():
-    #         print("{0}\t{1:.5f}\t".format(set_key, results[key][set_key]))
+        print("{}\t{}\t{}\t{}".format(key, \
+            results[key]["small"], results[key]["medium"], results[key]["large"]))
 
 main()

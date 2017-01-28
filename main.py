@@ -3,7 +3,7 @@
 from perf import metrics
 from sort import insert, shell, merge, heap, quick
 
-import random
+#import random
 
 def main():
     """ main """

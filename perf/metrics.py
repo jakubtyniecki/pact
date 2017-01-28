@@ -5,9 +5,9 @@ import timeit
 
 TESTS_COUNT = 10
 TESTS = {
-    "small": 30,
+    "small": 10,
     "medium": 300,
-    "large": 3000
+    "large": 1500
 }
 
 def execute(sut):

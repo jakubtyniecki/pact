@@ -5,9 +5,9 @@ import timeit
 
 TESTS_COUNT = 10
 TESTS = {
-    "small": 10,
-    "medium": 100,
-    "large": 1000
+    "small": 30,
+    "medium": 300,
+    "large": 3000
 }
 
 def execute(sut):
@@ -15,7 +15,7 @@ def execute(sut):
     results = {}
     for key in TESTS.keys():
         test_arr = random.sample(range(TESTS[key]), TESTS[key])
-        action = lambda arr=test_arr: sut.sort(arr)
+        action = lambda arr=test_arr: sut.sort(arr[:])
         results[key] = "{:0.5f}".format(timeit.timeit(action, number=TESTS_COUNT))
     return results
 

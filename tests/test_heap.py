@@ -37,14 +37,14 @@ class HeapSortTests(unittest.TestCase):
         # arrange
         inp = []
         # act
-        res = heap.sort([])
+        res = heap.sort(inp)
         # assert
         self.assertEqual(len(inp), len(res))
 
     def test_sort_a_given_array(self):
         """ should sort a given array """
         # act
-        res = heap.sort(self.arr)
+        res = heap.sort(self.arr[:])
         # assert
         self.assertTrue(self.is_sorted(res))
 

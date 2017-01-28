@@ -36,14 +36,14 @@ class InsertSortTests(unittest.TestCase):
         # arrange
         inp = []
         # act
-        res = insert.sort([])
+        res = insert.sort(inp)
         # assert
         self.assertEqual(len(inp), len(res))
 
     def test_sort_a_given_array(self):
         """ should sort a given array """
         # act
-        res = insert.sort(self.arr)
+        res = insert.sort(self.arr[:])
         # assert
         self.assertTrue(self.is_sorted(res))
 

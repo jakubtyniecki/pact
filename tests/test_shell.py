@@ -37,14 +37,14 @@ class ShellSortTests(unittest.TestCase):
         # arrange
         inp = []
         # act
-        res = shell.sort([])
+        res = shell.sort(inp)
         # assert
         self.assertEqual(len(inp), len(res))
 
     def test_sort_a_given_array(self):
         """ should sort a given array """
         # act
-        res = shell.sort(self.arr)
+        res = shell.sort(self.arr[:])
         # assert
         self.assertTrue(self.is_sorted(res))
 

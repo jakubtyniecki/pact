@@ -37,14 +37,14 @@ class MergeSortTests(unittest.TestCase):
         # arrange
         inp = []
         # act
-        res = merge.sort([])
+        res = merge.sort(inp)
         # assert
         self.assertEqual(len(inp), len(res))
 
     def test_sort_a_given_array(self):
         """ should sort a given array """
         # act
-        res = merge.sort(self.arr)
+        res = merge.sort(self.arr[:])
         # assert
         self.assertTrue(self.is_sorted(res))
 

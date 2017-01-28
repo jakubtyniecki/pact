@@ -7,7 +7,7 @@ from sort import quick
 
 class QuickSortTests(unittest.TestCase):
     """ quick sort unit tests class """
-    max = 100
+    max = 20
     arr = []
 
     def setUp(self):
@@ -37,14 +37,16 @@ class QuickSortTests(unittest.TestCase):
         # arrange
         inp = []
         # act
-        res = quick.sort([])
+        res = quick.sort(inp)
         # assert
         self.assertEqual(len(inp), len(res))
 
     def test_sort_a_given_array(self):
         """ should sort a given array """
+        print(self.arr)
         # act
-        res = quick.sort(self.arr)
+        res = quick.sort(self.arr[:])
+        print(self.arr)
         # assert
         self.assertTrue(self.is_sorted(res))
 

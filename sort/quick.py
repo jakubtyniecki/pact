@@ -18,7 +18,7 @@ def quicksort(arr, first, last):
     if first < last:
         splitpoint = partition(arr, first, last)
 
-        wnd = [[first, splitpoint - 1], [splitpoint + 1, last]]
+        wnd = [(first, splitpoint - 1), (splitpoint + 1, last)]
 
         if last - splitpoint < splitpoint - first:
             wnd[0], wnd[1] = wnd[1], wnd[0]

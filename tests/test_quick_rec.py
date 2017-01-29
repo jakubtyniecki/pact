@@ -1,13 +1,13 @@
 
-""" quick sort tests module """
+""" quick rec sort tests module """
 
 import unittest
 import random
 
-from sort import quick
+from sort import quick_rec
 
-class QuickSortTests(unittest.TestCase):
-    """ quick sort unit tests class """
+class QuickRecSortTests(unittest.TestCase):
+    """ quick rec sort unit tests class """
     max = 20
     arr = []
 
@@ -29,7 +29,7 @@ class QuickSortTests(unittest.TestCase):
         inp = None
         # act
         with self.assertRaises(TypeError) as ex:
-            quick.sort(inp)
+            quick_rec.sort(inp)
         # assert
         self.assertEqual("'NoneType' object is not iterable", str(ex.exception))
 
@@ -38,7 +38,7 @@ class QuickSortTests(unittest.TestCase):
         # arrange
         inp = []
         # act
-        res = quick.sort(inp)
+        res = quick_rec.sort(inp)
         # assert
         self.assertEqual(len(inp), len(res))
 
@@ -46,7 +46,7 @@ class QuickSortTests(unittest.TestCase):
         """ should sort a given array """
         print(self.arr)
         # act
-        res = quick.sort(self.arr[:])
+        res = quick_rec.sort(self.arr[:])
         print(self.arr)
         # assert
         self.assertTrue(self.is_sorted(res))

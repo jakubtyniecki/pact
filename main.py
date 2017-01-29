@@ -1,7 +1,7 @@
 """ main """
 
 from perf import metrics
-from sort import base, insert, shell, merge, heap, quick
+from sort import base, insert, shell, merge, heap, quick_rec
 
 #import random
 
@@ -21,11 +21,11 @@ def main():
     results["shell"] = metrics.execute(shell)
     results["merge"] = metrics.execute(merge)
     results["heap"] = metrics.execute(heap)
-    results["quick"] = metrics.execute(quick)
+    results["quick (rec)"] = metrics.execute(quick_rec)
 
-    print("{}\t{}\t{}\t{}".format("", "small", "medium", "large"))
+    print("{name: <15}\t{}\t{}\t{}".format("small", "medium", "large", name=""))
     for key in sorted(results.keys()):
-        print("{}\t{}\t{}\t{}".format(key, \
-            results[key]["small"], results[key]["medium"], results[key]["large"]))
+        print("{name: <15}\t{}\t{}\t{}".format(\
+            results[key]["small"], results[key]["medium"], results[key]["large"], name=key))
 
 main()

@@ -1,8 +1,8 @@
-""" quick sort module """
+""" quick rec sort module """
 
 
 def sort(arr):
-    """ quick sort """
+    """ quick rec sort """
 
     if arr is None:
         raise TypeError("'NoneType' object is not iterable")
@@ -14,7 +14,7 @@ def sort(arr):
     return arr
 
 def quicksort(arr, first, last):
-    """ quick sort """
+    """ quick rec sort """
     if first < last:
         splitpoint = partition(arr, first, last)
 

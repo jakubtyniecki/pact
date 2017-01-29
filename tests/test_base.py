@@ -1,14 +1,14 @@
 
-""" quick sort tests module """
+""" base sort tests module """
 
 import unittest
 import random
 
-from sort import quick
+from sort import insert
 
-class QuickSortTests(unittest.TestCase):
-    """ quick sort unit tests class """
-    max = 20
+class BaseSortTests(unittest.TestCase):
+    """ base sort unit tests class """
+    max = 100
     arr = []
 
     def setUp(self):
@@ -29,7 +29,7 @@ class QuickSortTests(unittest.TestCase):
         inp = None
         # act
         with self.assertRaises(TypeError) as ex:
-            quick.sort(inp)
+            base.sort(inp)
         # assert
         self.assertEqual("'NoneType' object is not iterable", str(ex.exception))
 
@@ -38,16 +38,14 @@ class QuickSortTests(unittest.TestCase):
         # arrange
         inp = []
         # act
-        res = quick.sort(inp)
+        res = sorted(inp)
         # assert
         self.assertEqual(len(inp), len(res))
 
     def test_sort_a_given_array(self):
         """ should sort a given array """
-        print(self.arr)
         # act
-        res = quick.sort(self.arr[:])
-        print(self.arr)
+        res = base.sort(self.arr[:])
         # assert
         self.assertTrue(self.is_sorted(res))
 

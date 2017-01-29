@@ -2,6 +2,7 @@
 
 import unittest
 import random
+
 from sort import insert
 
 class InsertSortTests(unittest.TestCase):
@@ -26,10 +27,10 @@ class InsertSortTests(unittest.TestCase):
         # arrange
         inp = None
         # act
-        with self.assertRaises(ValueError) as ex:
+        with self.assertRaises(TypeError) as ex:
             insert.sort(inp)
         # assert
-        self.assertEqual("input array is null", str(ex.exception))
+        self.assertEqual("'NoneType' object is not iterable", str(ex.exception))
 
     def test_empty_input(self):
         """ should return [] when input array is empty """

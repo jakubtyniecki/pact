@@ -3,6 +3,7 @@
 
 import unittest
 import random
+
 from sort import shell
 
 class ShellSortTests(unittest.TestCase):
@@ -27,10 +28,10 @@ class ShellSortTests(unittest.TestCase):
         # arrange
         inp = None
         # act
-        with self.assertRaises(ValueError) as ex:
+        with self.assertRaises(TypeError) as ex:
             shell.sort(inp)
         # assert
-        self.assertEqual("input array is null", str(ex.exception))
+        self.assertEqual("'NoneType' object is not iterable", str(ex.exception))
 
     def test_empty_input(self):
         """ should return [] when input array is empty """

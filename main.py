@@ -1,7 +1,7 @@
 """ main """
 
 from perf import metrics
-from sort import insert, shell, merge, heap, quick
+from sort import base, insert, shell, merge, heap, quick
 
 #import random
 
@@ -16,6 +16,7 @@ def main():
 
     results = {}
 
+    results["base"] = metrics.execute(base)
     results["insert"] = metrics.execute(insert)
     results["shell"] = metrics.execute(shell)
     results["merge"] = metrics.execute(merge)

@@ -5,7 +5,7 @@ def sort(arr):
     """ insert sort """
 
     if arr is None:
-        raise ValueError("input array is null")
+        raise TypeError("'NoneType' object is not iterable")
     if len(arr) == 0:
         return []
 

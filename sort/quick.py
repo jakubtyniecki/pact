@@ -6,7 +6,7 @@ def sort(arr):
 
     if arr is None:
         raise TypeError("'NoneType' object is not iterable")
-    if len(arr) == 0:
+    if not arr:
         return []
 
     quicksort(arr, 0, len(arr) - 1)
@@ -15,6 +15,7 @@ def sort(arr):
 
 def quicksort(arr, first, last):
     """ quick sort """
+
     stack = []
     stack.append((first, last))
 
@@ -33,6 +34,10 @@ def quicksort(arr, first, last):
 
 def partition(arr, first, last):
     """ partition """
+
+    assert first < len(arr) and last < len(arr), \
+        "first: {}, last: {}".format(first, last)
+
     pivotindex = pivotpoint(first, last)
     arr[first], arr[pivotindex] = arr[pivotindex], arr[first]
     pivotvalue = arr[first]
@@ -42,10 +47,10 @@ def partition(arr, first, last):
     done = False
     while not done:
         while left <= right and arr[left] <= pivotvalue:
-            left = left + 1
+            left += 1
 
         while arr[right] >= pivotvalue and right >= left:
-            right = right - 1
+            right -= 1
 
         if right < left:
             done = True

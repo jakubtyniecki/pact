@@ -6,7 +6,7 @@ def sort(arr):
 
     if arr is None:
         raise TypeError("'NoneType' object is not iterable")
-    if len(arr) == 0:
+    if not arr:
         return []
 
     insertsort(arr)
@@ -17,11 +17,10 @@ def insertsort(arr):
     """ insert sort """
 
     for i in range(1, len(arr)):
-        currentvalue = arr[i]
-        position = i
+        position, currentvalue = i, arr[i]
 
-        while position > 0 and arr[position-1] > currentvalue:
-            arr[position] = arr[position-1]
-            position = position - 1
+        while position > 0 and arr[position - 1] > currentvalue:
+            arr[position] = arr[position - 1]
+            position -= 1
 
         arr[position] = currentvalue

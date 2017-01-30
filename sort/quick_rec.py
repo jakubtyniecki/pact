@@ -6,7 +6,7 @@ def sort(arr):
 
     if arr is None:
         raise TypeError("'NoneType' object is not iterable")
-    if len(arr) == 0:
+    if not arr:
         return []
 
     quicksort(arr, 0, len(arr) - 1)
@@ -15,6 +15,7 @@ def sort(arr):
 
 def quicksort(arr, first, last):
     """ quick rec sort """
+
     if first < last:
         splitpoint = partition(arr, first, last)
 
@@ -28,28 +29,32 @@ def quicksort(arr, first, last):
 
 def partition(arr, first, last):
     """ partition """
+
+    assert first < len(arr) and last < len(arr), \
+        "first: {}, last: {}".format(first, last)
+
     pivotindex = pivotpoint(first, last)
     arr[first], arr[pivotindex] = arr[pivotindex], arr[first]
     pivotvalue = arr[first]
 
-    leftmark, rightmark = first + 1, last
+    left, right = first + 1, last
 
     done = False
     while not done:
-        while leftmark <= rightmark and arr[leftmark] <= pivotvalue:
-            leftmark = leftmark + 1
+        while left <= right and arr[left] <= pivotvalue:
+            left += 1
 
-        while arr[rightmark] >= pivotvalue and rightmark >= leftmark:
-            rightmark = rightmark - 1
+        while arr[right] >= pivotvalue and right >= left:
+            right -= 1
 
-        if rightmark < leftmark:
+        if right < left:
             done = True
         else:
-            arr[leftmark], arr[rightmark] = arr[rightmark], arr[leftmark]
+            arr[left], arr[right] = arr[right], arr[left]
 
-    arr[first], arr[rightmark] = arr[rightmark], arr[first]
+    arr[first], arr[right] = arr[right], arr[first]
 
-    return rightmark
+    return right
 
 def pivotpoint(first, last):
     """ pivot point strategy """

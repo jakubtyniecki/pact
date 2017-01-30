@@ -6,7 +6,7 @@ def sort(arr):
 
     if arr is None:
         raise TypeError("'NoneType' object is not iterable")
-    if len(arr) == 0:
+    if not arr:
         return []
 
     shellsort(arr)
@@ -26,6 +26,9 @@ def shellsort(arr):
 
 def gapsort(arr, start, gap):
     """ gap insertion sort """
+
+    assert start + gap < len(arr), \
+        "start: {}, gap: {}".format(start, gap)
 
     for i in range(start + gap, len(arr), gap):
         position, currentvalue = i, arr[i]

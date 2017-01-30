@@ -6,7 +6,7 @@ def sort(arr):
 
     if arr is None:
         raise TypeError("'NoneType' object is not iterable")
-    if len(arr) == 0:
+    if not arr:
         return []
 
     heapsort(arr)
@@ -33,6 +33,9 @@ def heapify(arr):
 
 def movedown(arr, start, end):
     """ constraints heap """
+
+    assert start < len(arr) and end < len(arr), \
+        "start: {}, end: {}".format(start, end)
 
     root = start
     while root * 2 + 1 <= end:

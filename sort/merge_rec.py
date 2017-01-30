@@ -1,8 +1,8 @@
-""" merge sort module """
+""" merge rec sort module """
 
 
 def sort(arr):
-    """ merge sort """
+    """ merge rec sort """
 
     if arr is None:
         raise TypeError("'NoneType' object is not iterable")
@@ -14,27 +14,27 @@ def sort(arr):
     return arr
 
 def mergesort(arr):
-    """ merge sort """
+    """ merge rec sort """
+    if len(arr) == 1:
+        return
 
-    step = 1
-    while step <= len(arr) - 1:
-        low = 0
-        while low < len(arr) - 1:
-            mid = low + step - 1
-            high = min(mid + step, len(arr) - 1)
-            merge(arr, low, mid, high)
-            low += 2*step
-        step *= 2
+    mid = len(arr) // 2
 
-def merge(arr, low, mid, high):
+    left = arr[:mid]
+    right = arr[mid:]
+
+    mergesort(left)
+    mergesort(right)
+
+    merge(arr, left, right)
+
+def merge(arr, left, right):
     """ merge """
 
-    left, right = arr[low:mid + 1], arr[mid + 1:high + 1]
-
-    i, j, k = 0, 0, low
+    i, j, k = 0, 0, 0
 
     while i < len(left) and j < len(right):
-        if left[i] <= right[j]:
+        if left[i] < right[j]:
             arr[k] = left[i]
             i = i + 1
         else:

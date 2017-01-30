@@ -1,13 +1,14 @@
 
-""" base sort tests module """
+
+""" merge rec sort tests module """
 
 import unittest
 import random
 
-from sort import base
+from sort import merge_rec
 
-class BaseSortTests(unittest.TestCase):
-    """ base sort unit tests class """
+class MergeSortTests(unittest.TestCase):
+    """ merge rec sort unit tests class """
     max = 100
     arr = []
 
@@ -29,7 +30,7 @@ class BaseSortTests(unittest.TestCase):
         inp = None
         # act
         with self.assertRaises(TypeError) as ex:
-            base.sort(inp)
+            merge_rec.sort(inp)
         # assert
         self.assertEqual("'NoneType' object is not iterable", str(ex.exception))
 
@@ -38,14 +39,14 @@ class BaseSortTests(unittest.TestCase):
         # arrange
         inp = []
         # act
-        res = sorted(inp)
+        res = merge_rec.sort(inp)
         # assert
         self.assertEqual(len(inp), len(res))
 
     def test_sort_a_given_array(self):
         """ should sort a given array """
         # act
-        res = base.sort(self.arr[:])
+        res = merge_rec.sort(self.arr[:])
         # assert
         self.assertTrue(self.is_sorted(res))
 

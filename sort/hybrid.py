@@ -24,18 +24,15 @@ def hybridsort(arr, first, last):
 
         left, right = pos[0], pos[1]
 
-        piv = partition(arr, left, right)
+        if right - left < 10:
+            insertsort(arr, left, right)
+        else:
+            piv = partition(arr, left, right)
 
-        if piv - 1 > left:
-            if piv - 1 - left < 10:
-                insertsort(arr, left, piv - 1)
-            else:
+            if piv - 1 > left:
                 stack.append((left, piv - 1))
 
-        if piv + 1 < right:
-            if right - piv + 1 < 10:
-                insertsort(arr, piv + 1, right)
-            else:
+            if piv + 1 < right:
                 stack.append((piv + 1, right))
 
 def insertsort(arr, first, last):

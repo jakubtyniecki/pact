@@ -16,21 +16,17 @@ def hybridsort(arr, first, last):
     """ hybrid rec sort """
 
     if first < last:
-        splitpoint = partition(arr, first, last)
-
-        wnd = [(first, splitpoint - 1), (splitpoint + 1, last)]
-
-        if last - splitpoint < splitpoint - first:
-            wnd[0], wnd[1] = wnd[1], wnd[0]
-
-        if wnd[0][1] - wnd[0][0] < 10:
-            insertsort(arr, wnd[0][0], wnd[0][1])
+        if last - first < 10:
+            insertsort(arr, first, last)
         else:
+            splitpoint = partition(arr, first, last)
+
+            wnd = [(first, splitpoint - 1), (splitpoint + 1, last)]
+
+            if last - splitpoint < splitpoint - first:
+                wnd[0], wnd[1] = wnd[1], wnd[0]
+
             hybridsort(arr, wnd[0][0], wnd[0][1])
-
-        if wnd[1][1] - wnd[1][0] < 10:
-            insertsort(arr, wnd[1][0], wnd[1][1])
-        else:
             hybridsort(arr, wnd[1][0], wnd[1][1])
 
 def insertsort(arr, first, last):

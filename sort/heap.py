@@ -46,4 +46,4 @@ def movedown(arr, start, end):
             arr[root], arr[child] = arr[child], arr[root]
             root = child
         else:
-            return
+            break

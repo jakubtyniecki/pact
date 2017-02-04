@@ -16,13 +16,13 @@ def sort(arr):
 def shellsort(arr):
     """ shell sort """
 
-    sublistcount = len(arr) // 2
+    count = len(arr) // 2
 
-    while sublistcount > 0:
-        for startposition in range(sublistcount):
-            gapsort(arr, startposition, sublistcount)
+    while count > 0:
+        for start in range(count):
+            gapsort(arr, start, count)
 
-        sublistcount = sublistcount // 2
+        count //= 2
 
 def gapsort(arr, start, gap):
     """ gap insertion sort """
@@ -35,6 +35,6 @@ def gapsort(arr, start, gap):
 
         while position >= gap and arr[position - gap] > currentvalue:
             arr[position] = arr[position - gap]
-            position = position - gap
+            position -= gap
 
         arr[position] = currentvalue

@@ -23,10 +23,10 @@ def short_metrics(variance):
 def get_style(sut_name):
     """ get style """
     color, linestyle, linewidth = None, None, None
-    if "rec" in sut_name:
-        linestyle = '--'
     if "base" in sut_name:
         color, linestyle, linewidth = 'k', ':', 3.0
+    if "rec" in sut_name:
+        linestyle = '--'
     if "hybrid" in sut_name:
         color, linewidth = 'k', 2.0
     return (color, linestyle, linewidth)
@@ -36,9 +36,8 @@ def get_tests(tests, fltr):
     cmp = lambda x: True
     if "rec" in fltr:
         cmp = lambda x: "rec" in x
-    else:
-        if "iter" in fltr:
-            cmp = lambda x: "rec" not in x
+    elif "iter" in fltr:
+         cmp = lambda x: "rec" not in x
     return sorted(
         [x for x in tests if "base" in x.__name__ or cmp(x.__name__)], \
         key=lambda s: s.__name__)
@@ -77,8 +76,7 @@ def main():
 
     if args.metrics == "short":
         short_metrics(args.variance)
-
-    if args.metrics == "plot":
+    elif args.metrics == "plot":
         plot_metrics(args.range, args.variance, args.filter, args.yscale)
 
 main()

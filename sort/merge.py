@@ -18,24 +18,24 @@ def mergesort(arr):
 
     step = 1
     while step <= len(arr) - 1:
-        low = 0
-        mid = low + step
+        first = 0
+        mid = first + step
         while mid < len(arr):
-            high = min(mid + step, len(arr))
-            merge(arr, low, mid, high)
-            low += 2*step
-            mid = low + step
+            last = min(mid + step, len(arr))
+            merge(arr, first, mid, last)
+            first += 2 * step
+            mid = first + step
         step *= 2
 
-def merge(arr, low, mid, high):
+def merge(arr, first, mid, last):
     """ merge """
 
-    assert low < len(arr) and mid < len(arr) and high <= len(arr), \
-        "low: {}, mid: {}, high: {}".format(low, mid, high)
+    assert first < len(arr) and mid < len(arr) and last <= len(arr), \
+        "first: {}, mid: {}, last: {}".format(first, mid, last)
 
-    left, right = arr[low:mid], arr[mid:high]
+    left, right = arr[first:mid], arr[mid:last]
 
-    i, j, k = 0, 0, low
+    i, j, k = 0, 0, first
 
     while i < len(left) and j < len(right):
         if left[i] <= right[j]:

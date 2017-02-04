@@ -15,6 +15,7 @@ def short_metrics(variance):
     """ short metrics """
 
     print("{name: <15}\t{}\t{}\t{}".format("small", "medium", "large", name=""))
+
     for sut in sorted(TESTS, key=lambda s: s.__name__):
         result = metrics.execute_short(sut, variance)
         print("{name: <15}\t{}\t{}\t{}".format(\
@@ -23,12 +24,14 @@ def short_metrics(variance):
 def get_style(sut_name):
     """ get style """
     color, linestyle, linewidth = None, None, None
+
     if "base" in sut_name:
         color, linestyle, linewidth = 'k', ':', 3.0
     if "rec" in sut_name:
         linestyle = '--'
     if "hybrid" in sut_name:
         color, linewidth = 'k', 2.0
+
     return (color, linestyle, linewidth)
 
 def get_tests(tests, fltr):
@@ -37,7 +40,7 @@ def get_tests(tests, fltr):
     if "rec" in fltr:
         cmp = lambda x: "rec" in x
     elif "iter" in fltr:
-         cmp = lambda x: "rec" not in x
+        cmp = lambda x: "rec" not in x
     return sorted(
         [x for x in tests if "base" in x.__name__ or cmp(x.__name__)], \
         key=lambda s: s.__name__)
@@ -46,11 +49,14 @@ def plot_metrics(rng, variance, fltr, yscale):
     """ plot metrics """
 
     exes = [x for x in metrics.gen_arrays(rng)]
+
     fig, ax = plt.subplots()
+
     if "log" in yscale:
         ax.set_yscale('log', basey=2 if "2" in yscale else 10)
+
     for sut in get_tests(TESTS, fltr):
-        result = metrics.execute_long(sut, rng, variance)
+        result = metrics.execute_plot(sut, rng, variance)
         color, linestyle, linewidth = get_style(sut.__name__)
         plt.plot(exes, result, \
             color=color, linestyle=linestyle, linewidth=linewidth, label=sut.__name__)
@@ -59,6 +65,7 @@ def plot_metrics(rng, variance, fltr, yscale):
     plt.xlabel("number of elements")
     plt.ylabel("time elapsed (seconds)")
     plt.legend(loc='upper left')
+
     plt.show()
 
 def main():

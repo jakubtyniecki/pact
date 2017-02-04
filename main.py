@@ -1,7 +1,5 @@
 """ main """
 
-#import random
-
 import argparse
 
 from matplotlib import pyplot as plt
@@ -24,18 +22,13 @@ def short_metrics(variance):
 
 def get_style(sut_name):
     """ get style """
-    color = None
-    linestyle = None
-    linewidth = None
+    color, linestyle, linewidth = None, None, None
     if "rec" in sut_name:
         linestyle = '--'
     if "base" in sut_name:
-        color = 'k'
-        linestyle = ':'
-        linewidth = 3.0
+        color, linestyle, linewidth = 'k', ':', 3.0
     if "hybrid" in sut_name:
-        color = 'k'
-        linewidth = 2.0
+        color, linewidth = 'k', 2.0
     return (color, linestyle, linewidth)
 
 def get_tests(tests, fltr):
@@ -50,13 +43,13 @@ def get_tests(tests, fltr):
         [x for x in tests if "base" in x.__name__ or cmp(x.__name__)], \
         key=lambda s: s.__name__)
 
-def plot_metrics(rng, variance, fltr):
+def plot_metrics(rng, variance, fltr, yscale):
     """ plot metrics """
 
     exes = [x for x in metrics.gen_arrays(rng)]
     fig, ax = plt.subplots()
-    #ax.set_xscale('log', basex=2)
-    ax.set_yscale('log', basey=2)
+    if "log" in yscale:
+        ax.set_yscale('log', basey=2 if "2" in yscale else 10)
     for sut in get_tests(TESTS, fltr):
         result = metrics.execute_long(sut, rng, variance)
         color, linestyle, linewidth = get_style(sut.__name__)
@@ -78,6 +71,7 @@ def main():
     parser.add_argument('-range', choices=['small', 'medium', 'large'], default="small")
     parser.add_argument('-variance', choices=['small', 'medium', 'large'], default="large")
     parser.add_argument('-filter', choices=['all', 'iter', 'rec'], default="all")
+    parser.add_argument('-yscale', choices=['default', 'log2', 'log10'], default="default")
 
     args = parser.parse_args()
 
@@ -85,6 +79,6 @@ def main():
         short_metrics(args.variance)
 
     if args.metrics == "plot":
-        plot_metrics(args.range, args.variance, args.filter)
+        plot_metrics(args.range, args.variance, args.filter, args.yscale)
 
 main()

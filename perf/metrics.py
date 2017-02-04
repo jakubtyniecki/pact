@@ -59,7 +59,7 @@ TESTS_PLOT = {
         },
         "large": {
             "step": 100,
-            "max_len": 10000
+            "max_len": 5000
         }
     }
 }

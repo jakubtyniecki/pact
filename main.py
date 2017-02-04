@@ -80,6 +80,8 @@ def main():
     parser.add_argument('-yscale', choices=['default', 'log2', 'log10'], default="default")
 
     args = parser.parse_args()
+    #args = parser.parse_args( \
+    #    ['-metrics', 'plot', '-range', 'medium', '-variance', 'small', '-yscale', 'log2'])
 
     if args.metrics == "short":
         short_metrics(args.variance)

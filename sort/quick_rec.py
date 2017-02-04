@@ -19,13 +19,15 @@ def quicksort(arr, first, last):
     if first < last:
         splitpoint = partition(arr, first, last)
 
-        wnd = [(first, splitpoint - 1), (splitpoint + 1, last)]
+        sides = {"left": (first, splitpoint - 1), "right": (splitpoint + 1, last)}
+
+        first_side, second_side = "left", "right"
 
         if last - splitpoint < splitpoint - first:
-            wnd[0], wnd[1] = wnd[1], wnd[0]
+            first_side, second_side = second_side, first_side
 
-        quicksort(arr, wnd[0][0], wnd[0][1])
-        quicksort(arr, wnd[1][0], wnd[1][1])
+        quicksort(arr, sides[first_side][0], sides[first_side][1])
+        quicksort(arr, sides[second_side][0], sides[second_side][1])
 
 def partition(arr, first, last):
     """ partition """

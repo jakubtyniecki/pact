@@ -5,35 +5,69 @@ import timeit
 
 TESTS_SHORT_COUNT = 10
 TESTS_SHORT = {
-    "small": 10,
-    "medium": 300,
-    "large": 1500
+    "range": {
+        "small": {
+            "max_len": 10
+        },
+        "medium": {
+            "max_len": 300
+        },
+        "large": {
+            "max_len": 1500
+        }
+    }
 }
 
-def execute_short(sut):
+def get_variance(rng, variance):
+    """ get variance """
+    return {
+        'small': 10,
+        'medium': TESTS_SHORT["range"][rng]["max_len"] // 3,
+        'large': TESTS_SHORT["range"][rng]["max_len"]
+    }[variance]
+
+def get_array(variance, max_len):
+    """ get array """
+    return [random.randint(1, variance) for _ in range(max_len)]
+
+def execute_short(sut, variance):
     """ execute """
     results = {}
-    for key in TESTS_SHORT.keys():
-        test_arr = random.sample(range(TESTS_SHORT[key]), TESTS_SHORT[key])
+    for rng in TESTS_SHORT["range"].keys():
+        var = get_variance(rng, variance)
+        max_len = TESTS_SHORT["range"][rng]["max_len"]
+        test_arr = get_array(var, max_len)
         action = lambda arr=test_arr: sut.sort(arr[:])
-        results[key] = "{:0.5f}".format(timeit.timeit(action, number=TESTS_SHORT_COUNT))
+        results[rng] = "{:0.5f}".format(timeit.timeit(action, number=TESTS_SHORT_COUNT))
     return results
 
-TESTS_LONG_COUNT = 1
-TESTS_LONG_NUM = 8
+TESTS_LONG = {
+    "timeit_count": 1,
+    "range": {
+        "small": {
+            "step": 10,
+            "max_len": 500
+        },
+        "large": {
+            "step": 100,
+            "max_len": 50000
+        }
+    }
+}
 
-def gen(val):
-    """ gen """
-    i = 8
-    for current in range(val + 1):
+def gen_arrays(rng):
+    """ gen arrays """
+    step = TESTS_LONG["range"][rng]["step"]
+    max_len = TESTS_LONG["range"][rng]["max_len"]
+    for i in range(step, max_len, step):
         yield i
-        i <<= 1
 
-def execute_long(sut):
+def execute_long(sut, rng, variance):
     """ execute """
     results = []
-    for num in gen(TESTS_LONG_NUM):
-        test_arr = random.sample(range(num), num)
+    var = get_variance(rng, variance)
+    for max_len in gen_arrays(rng):
+        test_arr = get_array(var, max_len)
         action = lambda arr=test_arr: sut.sort(arr[:])
-        results.append(timeit.timeit(action, number=TESTS_LONG_COUNT) * 10)
+        results.append(timeit.timeit(action, number=TESTS_LONG["timeit_count"]))
     return results

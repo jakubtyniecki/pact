@@ -1,5 +1,6 @@
 """ hybrid sort module """
 
+THRESHOLD = 10
 
 def sort(arr):
     """ hybrid sort """
@@ -24,7 +25,7 @@ def hybridsort(arr, first, last):
 
         left, right = pos[0], pos[1]
 
-        if right - left < 10:
+        if right - left < THRESHOLD:
             insertsort(arr, left, right)
         else:
             piv = partition(arr, left, right)
@@ -56,14 +57,13 @@ def partition(arr, first, last):
     assert first < len(arr) and last < len(arr), \
         "first: {}, last: {}".format(first, last)
 
-    pivotindex = pivotpoint(first, last)
+    pivotindex = pivotpoint(arr, first, last)
     arr[first], arr[pivotindex] = arr[pivotindex], arr[first]
     pivotvalue = arr[first]
 
     left, right = first + 1, last
 
-    done = False
-    while not done:
+    while True:
         while left <= right and arr[left] <= pivotvalue:
             left += 1
 
@@ -71,7 +71,7 @@ def partition(arr, first, last):
             right -= 1
 
         if right < left:
-            done = True
+            break
         else:
             arr[left], arr[right] = arr[right], arr[left]
 
@@ -79,6 +79,12 @@ def partition(arr, first, last):
 
     return right
 
-def pivotpoint(first, last):
+def pivotpoint(arr, first, last):
     """ pivot point strategy """
-    return first + (last - first) // 2
+    mid = first + (last - first) // 2
+    if (arr[first] - arr[mid]) * (arr[last] - arr[first]) >= 0:
+        return first
+    elif (arr[mid] - arr[first]) * (arr[last] - arr[mid]) >= 0:
+        return mid
+    else:
+        return last

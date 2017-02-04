@@ -1,5 +1,7 @@
 """ hybrid rec sort module """
 
+THRESHOLD = 10
+
 def sort(arr):
     """ hybrid rec sort """
 
@@ -16,18 +18,20 @@ def hybridsort(arr, first, last):
     """ hybrid rec sort """
 
     if first < last:
-        if last - first < 10:
+        if last - first < THRESHOLD:
             insertsort(arr, first, last)
         else:
             splitpoint = partition(arr, first, last)
 
-            wnd = [(first, splitpoint - 1), (splitpoint + 1, last)]
+            sides = {"left": (first, splitpoint - 1), "right": (splitpoint + 1, last)}
+
+            first_side, second_side = "left", "right"
 
             if last - splitpoint < splitpoint - first:
-                wnd[0], wnd[1] = wnd[1], wnd[0]
+                first_side, second_side = second_side, first_side
 
-            hybridsort(arr, wnd[0][0], wnd[0][1])
-            hybridsort(arr, wnd[1][0], wnd[1][1])
+            hybridsort(arr, sides[first_side][0], sides[first_side][1])
+            hybridsort(arr, sides[second_side][0], sides[second_side][1])
 
 def insertsort(arr, first, last):
     """ insert sort """
@@ -50,14 +54,13 @@ def partition(arr, first, last):
     assert first < len(arr) and last < len(arr), \
         "first: {}, last: {}".format(first, last)
 
-    pivotindex = pivotpoint(first, last)
+    pivotindex = pivotpoint(arr, first, last)
     arr[first], arr[pivotindex] = arr[pivotindex], arr[first]
     pivotvalue = arr[first]
 
     left, right = first + 1, last
 
-    done = False
-    while not done:
+    while True:
         while left <= right and arr[left] <= pivotvalue:
             left += 1
 
@@ -65,7 +68,7 @@ def partition(arr, first, last):
             right -= 1
 
         if right < left:
-            done = True
+            break
         else:
             arr[left], arr[right] = arr[right], arr[left]
 
@@ -73,6 +76,12 @@ def partition(arr, first, last):
 
     return right
 
-def pivotpoint(first, last):
+def pivotpoint(arr, first, last):
     """ pivot point strategy """
-    return first + (last - first) // 2
+    mid = first + (last - first) // 2
+    if (arr[first] - arr[mid]) * (arr[last] - arr[first]) >= 0:
+        return first
+    elif (arr[mid] - arr[first]) * (arr[last] - arr[mid]) >= 0:
+        return mid
+    else:
+        return last

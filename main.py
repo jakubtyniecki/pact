@@ -2,53 +2,64 @@
 
 #import random
 
-import numpy as np
+import argparse
+
 from matplotlib import pyplot as plt
 
 from perf import metrics
 from sort import base, insert, shell, merge_rec, merge, heap, quick_rec, quick, hybrid_rec, hybrid
 
-def main():
-    """ main """
+TESTS = [
+    base, insert, shell, merge_rec, merge, heap, quick_rec, quick, hybrid_rec, hybrid
+]
 
-    # arr = [random.randint(1, 10) for _ in range(30)]
-    # print(arr)
+def short_metrics(variance):
+    """ short metrics """
 
-    # res = hybrid.sort(arr[:])
-    # print(res)
+    print("{name: <15}\t{}\t{}\t{}".format("small", "medium", "large", name=""))
+    for sut in sorted(TESTS, key=lambda s: s.__name__):
+        result = metrics.execute_short(sut, variance)
+        print("{name: <15}\t{}\t{}\t{}".format(\
+            result["small"], result["medium"], result["large"], name=sut.__name__))
 
-    # tests_short = [
-    #     base, insert, shell, merge_rec, merge, heap, quick_rec, quick, hybrid_rec, hybrid
-    # ]
+def get_style(sut_name):
+    """ get style """
+    color = None
+    linestyle = None
+    linewidth = None
+    if "rec" in sut_name:
+        linestyle = '--'
+    if "base" in sut_name:
+        color = 'k'
+        linestyle = ':'
+        linewidth = 3.0
+    if "hybrid" in sut_name:
+        color = 'k'
+        linewidth = 2.0
+    return (color, linestyle, linewidth)
 
-    # print("{name: <15}\t{}\t{}\t{}".format("small", "medium", "large", name=""))
-    # for sut in sorted(tests_short, key=lambda s: s.__name__):
-    #     result = metrics.execute_short(sut, "large")
-    #     print("{name: <15}\t{}\t{}\t{}".format(\
-    #         result["small"], result["medium"], result["large"], name=sut.__name__))
+def get_tests(tests, fltr):
+    """ get tests """
+    cmp = lambda x: True
+    if "rec" in fltr:
+        cmp = lambda x: "rec" in x
+    else:
+        if "iter" in fltr:
+            cmp = lambda x: "rec" not in x
+    return sorted(
+        [x for x in tests if "base" in x.__name__ or cmp(x.__name__)], \
+        key=lambda s: s.__name__)
 
-    tests_long = [
-        base, insert, shell, merge_rec, merge, heap, quick_rec, quick, hybrid_rec, hybrid
-    ]
+def plot_metrics(rng, variance, fltr):
+    """ plot metrics """
 
-    exes = [x for x in metrics.gen_arrays("large")]
+    exes = [x for x in metrics.gen_arrays(rng)]
     fig, ax = plt.subplots()
     #ax.set_xscale('log', basex=2)
     ax.set_yscale('log', basey=2)
-    for sut in sorted(tests_long, key=lambda s: s.__name__):
-        result = metrics.execute_long(sut, "large", "large")
-        color = None
-        linestyle = None
-        linewidth = None
-        if "rec" in sut.__name__:
-            linestyle = '--'
-        if "base" in sut.__name__:
-            color = 'k'
-            linestyle = ':'
-            linewidth = 3.0
-        if "hybrid" in sut.__name__:
-            color = 'k'
-            linewidth = 2.0
+    for sut in get_tests(TESTS, fltr):
+        result = metrics.execute_long(sut, rng, variance)
+        color, linestyle, linewidth = get_style(sut.__name__)
         plt.plot(exes, result, \
             color=color, linestyle=linestyle, linewidth=linewidth, label=sut.__name__)
 
@@ -57,5 +68,23 @@ def main():
     plt.ylabel("time elapsed (seconds)")
     plt.legend(loc='upper left')
     plt.show()
+
+def main():
+    """ main """
+
+    parser = argparse.ArgumentParser(description='PACT arguments.')
+
+    parser.add_argument('-metrics', choices=['short', 'plot'], default="short")
+    parser.add_argument('-range', choices=['small', 'medium', 'large'], default="small")
+    parser.add_argument('-variance', choices=['small', 'medium', 'large'], default="large")
+    parser.add_argument('-filter', choices=['all', 'iter', 'rec'], default="all")
+
+    args = parser.parse_args()
+
+    if args.metrics == "short":
+        short_metrics(args.variance)
+
+    if args.metrics == "plot":
+        plot_metrics(args.range, args.variance, args.filter)
 
 main()

@@ -48,9 +48,13 @@ TESTS_LONG = {
             "step": 10,
             "max_len": 500
         },
+        "medium": {
+            "step": 30,
+            "max_len": 1500
+        },
         "large": {
             "step": 100,
-            "max_len": 50000
+            "max_len": 10000
         }
     }
 }

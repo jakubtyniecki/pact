@@ -27,8 +27,8 @@ def get_variance(rng, variance):
         'large': TESTS_SHORT["range"][rng]["max_len"]
     }[variance]
 
-def get_array(variance, max_len):
-    """ get array """
+def gen_array(variance, max_len):
+    """ gen array """
 
     return [random.randint(1, variance) for _ in range(max_len)]
 
@@ -40,7 +40,7 @@ def execute_short(sut, variance):
     for rng in TESTS_SHORT["range"].keys():
         var = get_variance(rng, variance)
         max_len = TESTS_SHORT["range"][rng]["max_len"]
-        test_arr = get_array(var, max_len)
+        test_arr = gen_array(var, max_len)
         action = lambda arr=test_arr: sut.sort(arr[:])
         results[rng] = "{:0.5f}".format(timeit.timeit(action, number=TESTS_SHORT["timeit_count"]))
 
@@ -64,8 +64,8 @@ TESTS_PLOT = {
     }
 }
 
-def gen_arrays(rng):
-    """ gen arrays """
+def gen_array_lengths(rng):
+    """ gen array lengths """
 
     step = TESTS_PLOT["range"][rng]["step"]
     max_len = TESTS_PLOT["range"][rng]["max_len"]
@@ -79,8 +79,8 @@ def execute_plot(sut, rng, variance):
     results = []
     var = get_variance(rng, variance)
 
-    for max_len in gen_arrays(rng):
-        test_arr = get_array(var, max_len)
+    for max_len in gen_array_lengths(rng):
+        test_arr = gen_array(var, max_len)
         action = lambda arr=test_arr: sut.sort(arr[:])
         results.append(timeit.timeit(action, number=TESTS_PLOT["timeit_count"]))
 

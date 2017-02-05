@@ -19,10 +19,9 @@ def mergesort(arr):
     if len(arr) == 1:
         return
 
-    mid = len(arr) // 2
+    mid = len(arr) >> 1
 
-    left = arr[:mid]
-    right = arr[mid:]
+    left, right = arr[:mid], arr[mid:]
 
     mergesort(left)
     mergesort(right)

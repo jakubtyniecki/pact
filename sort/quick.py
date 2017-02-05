@@ -39,24 +39,26 @@ def partition(arr, first, last):
         "first: {}, last: {}".format(first, last)
 
     pivotindex = pivotpoint(first, last)
-    arr[first], arr[pivotindex] = arr[pivotindex], arr[first]
+
+    if pivotindex > first:
+        arr[first], arr[pivotindex] = arr[pivotindex], arr[first]
+
     pivotvalue = arr[first]
 
     left, right = first + 1, last
 
-    while True:
+    while right >= left:
         while left <= right and arr[left] <= pivotvalue:
             left += 1
 
         while arr[right] >= pivotvalue and right >= left:
             right -= 1
 
-        if right < left:
-            break
-        else:
+        if right > left:
             arr[left], arr[right] = arr[right], arr[left]
 
-    arr[first], arr[right] = arr[right], arr[first]
+    if right > first:
+        arr[first], arr[right] = arr[right], arr[first]
 
     return right
 

@@ -20,12 +20,14 @@ def mergesort(arr):
     while step <= len(arr) - 1:
         first = 0
         mid = first + step
+
         while mid < len(arr):
             last = min(mid + step, len(arr))
             merge(arr, first, mid, last)
-            first += 2 * step
+            first += step << 1
             mid = first + step
-        step *= 2
+
+        step <<= 1
 
 def merge(arr, first, mid, last):
     """ merge """

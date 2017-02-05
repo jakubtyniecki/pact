@@ -48,12 +48,12 @@ def get_tests(tests, fltr):
 def plot_metrics(rng, variance, fltr, yscale):
     """ plot metrics """
 
-    exes = [x for x in metrics.gen_arrays(rng)]
+    exes = [x for x in metrics.gen_array_lengths(rng)]
 
-    fig, ax = plt.subplots()
+    _, xaxis = plt.subplots()
 
     if "log" in yscale:
-        ax.set_yscale('log', basey=2 if "2" in yscale else 10)
+        xaxis.set_yscale('log', basey=2 if "2" in yscale else 10)
 
     for sut in get_tests(TESTS, fltr):
         result = metrics.execute_plot(sut, rng, variance)
@@ -80,8 +80,12 @@ def main():
     parser.add_argument('-yscale', choices=['default', 'log2', 'log10'], default="default")
 
     args = parser.parse_args()
-    #args = parser.parse_args( \
-    #    ['-metrics', 'plot', '-range', 'medium', '-variance', 'small', '-yscale', 'log2'])
+    # args = parser.parse_args([
+    #     '-metrics', 'plot', \
+    #     '-range', 'medium', \
+    #     '-variance', 'small', \
+    #     '-filter', 'iter', \
+    #     '-yscale', 'log2'])
 
     if args.metrics == "short":
         short_metrics(args.variance)

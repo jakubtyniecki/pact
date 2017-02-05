@@ -16,13 +16,13 @@ def sort(arr):
 def shellsort(arr):
     """ shell sort """
 
-    count = len(arr) // 2
+    count = len(arr) >> 1
 
     while count > 0:
         for start in range(count):
             gapsort(arr, start, count)
 
-        count //= 2
+        count >>= 1
 
 def gapsort(arr, start, gap):
     """ gap insertion sort """

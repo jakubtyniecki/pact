@@ -4,6 +4,7 @@
 import unittest
 import random
 
+from tests import helper
 from sort import merge
 
 class MergeSortTests(unittest.TestCase):
@@ -14,14 +15,6 @@ class MergeSortTests(unittest.TestCase):
     def setUp(self):
         """ setting up for the test """
         self.arr = random.sample(range(self.max), self.max)
-
-    def tearDown(self):
-        """ cleaning up after the test"""
-        pass
-
-    def is_sorted(self, arr):
-        """ assert array is sorted """
-        return all(arr[i] <= arr[i+1] for i in range(len(arr)-1))
 
     def test_null_input(self):
         """ should raise when input array is None """
@@ -47,7 +40,4 @@ class MergeSortTests(unittest.TestCase):
         # act
         res = merge.sort(self.arr[:])
         # assert
-        self.assertTrue(self.is_sorted(res))
-
-if __name__ == '__main__':
-    unittest.main()
+        self.assertTrue(helper.is_sorted(res))

@@ -36,11 +36,14 @@ def get_style(sut_name):
 
 def get_tests(tests, fltr):
     """ get tests """
+
     cmp = lambda x: True
+    
     if "rec" in fltr:
         cmp = lambda x: "rec" in x
     elif "iter" in fltr:
         cmp = lambda x: "rec" not in x
+
     return sorted(
         [x for x in tests if "base" in x.__name__ or cmp(x.__name__)], \
         key=lambda s: s.__name__)

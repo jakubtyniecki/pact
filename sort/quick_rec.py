@@ -41,8 +41,7 @@ def partition(arr, first, last):
 
     left, right = first + 1, last
 
-    done = False
-    while not done:
+    while True:
         while left <= right and arr[left] <= pivotvalue:
             left += 1
 
@@ -50,7 +49,7 @@ def partition(arr, first, last):
             right -= 1
 
         if right < left:
-            done = True
+            break
         else:
             arr[left], arr[right] = arr[right], arr[left]
 

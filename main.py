@@ -23,6 +23,7 @@ def short_metrics(variance):
 
 def get_style(sut_name):
     """ get style """
+
     color, linestyle, linewidth = None, None, None
 
     if "base" in sut_name:
@@ -38,7 +39,7 @@ def get_tests(tests, fltr):
     """ get tests """
 
     cmp = lambda x: True
-    
+
     if "rec" in fltr:
         cmp = lambda x: "rec" in x
     elif "iter" in fltr:

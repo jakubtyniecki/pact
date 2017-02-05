@@ -4,8 +4,8 @@
 import unittest
 import random
 
-from tests import helper
 from sort import hybrid_rec
+from tests import helper
 
 class HybridRecSortTests(unittest.TestCase):
     """ hybrid rec sort unit tests class """
@@ -20,9 +20,11 @@ class HybridRecSortTests(unittest.TestCase):
         """ should raise when input array is None """
         # arrange
         inp = None
+
         # act
         with self.assertRaises(TypeError) as ex:
             hybrid_rec.sort(inp)
+
         # assert
         self.assertEqual("'NoneType' object is not iterable", str(ex.exception))
 
@@ -30,8 +32,10 @@ class HybridRecSortTests(unittest.TestCase):
         """ should return [] when input array is empty """
         # arrange
         inp = []
+
         # act
         res = hybrid_rec.sort(inp)
+
         # assert
         self.assertEqual(len(inp), len(res))
 
@@ -39,5 +43,6 @@ class HybridRecSortTests(unittest.TestCase):
         """ should sort a given array """
         # act
         res = hybrid_rec.sort(self.arr[:])
+
         # assert
         self.assertTrue(helper.is_sorted(res))

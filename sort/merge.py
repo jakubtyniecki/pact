@@ -1,13 +1,10 @@
 """ merge sort module """
 
+from sort.framework import validate
 
+@validate
 def sort(arr):
     """ merge sort """
-
-    if arr is None:
-        raise TypeError("'NoneType' object is not iterable")
-    if not arr:
-        return []
 
     mergesort(arr)
 
@@ -23,7 +20,9 @@ def mergesort(arr):
 
         while mid < len(arr):
             last = min(mid + step, len(arr))
+
             merge(arr, first, mid, last)
+
             first += step << 1
             mid = first + step
 

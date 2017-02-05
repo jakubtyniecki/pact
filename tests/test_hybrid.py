@@ -4,8 +4,8 @@
 import unittest
 import random
 
-from tests import helper
 from sort import hybrid
+from tests import helper
 
 class HybridSortTests(unittest.TestCase):
     """ hybrid sort unit tests class """
@@ -20,9 +20,11 @@ class HybridSortTests(unittest.TestCase):
         """ should raise when input array is None """
         # arrange
         inp = None
+
         # act
         with self.assertRaises(TypeError) as ex:
             hybrid.sort(inp)
+
         # assert
         self.assertEqual("'NoneType' object is not iterable", str(ex.exception))
 
@@ -30,8 +32,10 @@ class HybridSortTests(unittest.TestCase):
         """ should return [] when input array is empty """
         # arrange
         inp = []
+
         # act
         res = hybrid.sort(inp)
+
         # assert
         self.assertEqual(len(inp), len(res))
 
@@ -39,5 +43,6 @@ class HybridSortTests(unittest.TestCase):
         """ should sort a given array """
         # act
         res = hybrid.sort(self.arr[:])
+
         # assert
         self.assertTrue(helper.is_sorted(res))

@@ -1,13 +1,10 @@
 """ quick sort module """
 
+from sort.framework import validate
 
+@validate
 def sort(arr):
     """ quick sort """
-
-    if arr is None:
-        raise TypeError("'NoneType' object is not iterable")
-    if not arr:
-        return []
 
     shellsort(arr)
 

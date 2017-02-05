@@ -1,14 +1,12 @@
 """ hybrid rec sort module """
 
+from sort.framework import validate
+
 THRESHOLD = 10
 
+@validate
 def sort(arr):
     """ hybrid rec sort """
-
-    if arr is None:
-        raise TypeError("'NoneType' object is not iterable")
-    if not arr:
-        return []
 
     hybridsort(arr, 0, len(arr) - 1)
 
@@ -80,7 +78,9 @@ def partition(arr, first, last):
 
 def pivotpoint(arr, first, last):
     """ pivot point strategy """
-    mid = first + (last - first) // 2
+
+    mid = first + (last - first) >> 1
+
     if (arr[first] - arr[mid]) * (arr[last] - arr[first]) >= 0:
         return first
     elif (arr[mid] - arr[first]) * (arr[last] - arr[mid]) >= 0:

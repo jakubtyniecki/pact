@@ -3,8 +3,8 @@
 import unittest
 import random
 
-from tests import helper
 from sort import insert
+from tests import helper
 
 class InsertSortTests(unittest.TestCase):
     """ insert sort unit tests class """
@@ -19,9 +19,11 @@ class InsertSortTests(unittest.TestCase):
         """ should raise when input array is None """
         # arrange
         inp = None
+
         # act
         with self.assertRaises(TypeError) as ex:
             insert.sort(inp)
+
         # assert
         self.assertEqual("'NoneType' object is not iterable", str(ex.exception))
 
@@ -29,8 +31,10 @@ class InsertSortTests(unittest.TestCase):
         """ should return [] when input array is empty """
         # arrange
         inp = []
+
         # act
         res = insert.sort(inp)
+
         # assert
         self.assertEqual(len(inp), len(res))
 
@@ -38,5 +42,6 @@ class InsertSortTests(unittest.TestCase):
         """ should sort a given array """
         # act
         res = insert.sort(self.arr[:])
+
         # assert
         self.assertTrue(helper.is_sorted(res))

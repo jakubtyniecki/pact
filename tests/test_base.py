@@ -4,8 +4,8 @@
 import unittest
 import random
 
-from tests import helper
 from sort import base
+from tests import helper
 
 class BaseSortTests(unittest.TestCase):
     """ base sort unit tests class """
@@ -20,9 +20,11 @@ class BaseSortTests(unittest.TestCase):
         """ should raise when input array is None """
         # arrange
         inp = None
+
         # act
         with self.assertRaises(TypeError) as ex:
             base.sort(inp)
+
         # assert
         self.assertEqual("'NoneType' object is not iterable", str(ex.exception))
 
@@ -30,8 +32,10 @@ class BaseSortTests(unittest.TestCase):
         """ should return [] when input array is empty """
         # arrange
         inp = []
+
         # act
         res = sorted(inp)
+
         # assert
         self.assertEqual(len(inp), len(res))
 
@@ -39,5 +43,6 @@ class BaseSortTests(unittest.TestCase):
         """ should sort a given array """
         # act
         res = base.sort(self.arr[:])
+
         # assert
         self.assertTrue(helper.is_sorted(res))

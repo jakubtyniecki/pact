@@ -1,13 +1,10 @@
 """ heap sort module """
 
+from sort.framework import validate
 
+@validate
 def sort(arr):
     """ heap sort """
-
-    if arr is None:
-        raise TypeError("'NoneType' object is not iterable")
-    if not arr:
-        return []
 
     heapsort(arr)
 

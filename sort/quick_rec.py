@@ -1,13 +1,10 @@
 """ quick rec sort module """
 
+from sort.framework import validate
 
+@validate
 def sort(arr):
     """ quick rec sort """
-
-    if arr is None:
-        raise TypeError("'NoneType' object is not iterable")
-    if not arr:
-        return []
 
     quicksort(arr, 0, len(arr) - 1)
 
@@ -61,4 +58,5 @@ def partition(arr, first, last):
 
 def pivotpoint(first, last):
     """ pivot point strategy """
-    return first + (last - first) // 2
+
+    return first + (last - first) >> 1

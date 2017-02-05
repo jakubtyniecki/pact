@@ -4,8 +4,8 @@
 import unittest
 import random
 
-from tests import helper
 from sort import quick
+from tests import helper
 
 class QuickSortTests(unittest.TestCase):
     """ quick sort unit tests class """
@@ -20,9 +20,11 @@ class QuickSortTests(unittest.TestCase):
         """ should raise when input array is None """
         # arrange
         inp = None
+
         # act
         with self.assertRaises(TypeError) as ex:
             quick.sort(inp)
+
         # assert
         self.assertEqual("'NoneType' object is not iterable", str(ex.exception))
 
@@ -30,8 +32,10 @@ class QuickSortTests(unittest.TestCase):
         """ should return [] when input array is empty """
         # arrange
         inp = []
+
         # act
         res = quick.sort(inp)
+
         # assert
         self.assertEqual(len(inp), len(res))
 
@@ -39,5 +43,6 @@ class QuickSortTests(unittest.TestCase):
         """ should sort a given array """
         # act
         res = quick.sort(self.arr[:])
+
         # assert
         self.assertTrue(helper.is_sorted(res))

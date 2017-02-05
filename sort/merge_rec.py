@@ -1,13 +1,10 @@
 """ merge rec sort module """
 
+from sort.framework import validate
 
+@validate
 def sort(arr):
     """ merge rec sort """
-
-    if arr is None:
-        raise TypeError("'NoneType' object is not iterable")
-    if not arr:
-        return []
 
     mergesort(arr)
 

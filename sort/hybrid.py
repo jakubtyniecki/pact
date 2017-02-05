@@ -8,11 +8,6 @@ THRESHOLD = 10
 def sort(arr):
     """ hybrid sort """
 
-    if arr is None:
-        raise TypeError("'NoneType' object is not iterable")
-    if not arr:
-        return []
-
     hybridsort(arr, 0, len(arr) - 1)
 
     return arr

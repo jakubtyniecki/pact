@@ -35,7 +35,7 @@ def movedown(arr, start, end):
         "start: {}, end: {}".format(start, end)
 
     root = start
-    while root << 1 <= end - 1:
+    while (root << 1) + 1 <= end:
         child = (root << 1) + 1
 
         if child + 1 <= end and arr[child] < arr[child + 1]:
